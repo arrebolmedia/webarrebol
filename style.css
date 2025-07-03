@@ -1,0 +1,1683 @@
+/*
+Theme Name: Arrebol Theme
+Theme URI: https://arrebol.com.mx/
+Author: Tu Nombre
+Description: Tema WordPress personalizado para fotografía y video.
+Version: 1.0
+Text Domain: arrebol-theme
+*/
+
+/* --- Inspiración jennifermoher.com: Look editorial, minimalista y elegante --- */
+
+/* Importar fuentes desde Google Fonts y Adobe Typekit */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400;600;700&display=swap');
+@import url('https://use.typekit.net/kan4vqt.css');
+
+body {
+    font-family: 'minion-pro', 'Montserrat', Arial, sans-serif;
+    background: #f8f5f2;
+    color: #181818;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure no horizontal scroll bar appears */
+html, body {
+    overflow-x: hidden;
+}
+
+/* Prevent sections from exceeding viewport width */
+.slider-container, .about-photographer, .photographer-profile, .photos-memories-section, .inspirational-quote-section, .gallery-section, .sources-inspiration-section, .contact-section {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Fix potential margin/padding issues */
+.container {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Typography System - Standardized */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    color: #2c2c2c;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.01em;
+}
+
+h1 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    line-height: 1.2;
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    line-height: 1.3;
+}
+
+p {
+    font-family: 'Minion Pro', 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1.2rem;
+}
+
+/* Variables de color y tipografía */
+:root {
+    --primary-color: #222;
+    --secondary-color: #f8f5f2;
+    --accent-color: #c46f4c;
+    --light-gray: #eee;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Remove all vertical margins from main sections to eliminate beige spaces */
+section.about-photographer,
+section.photographer-profile,
+section.photos-memories-section,
+section.inspirational-quote-section,
+section.gallery-section,
+section.sources-inspiration-section,
+section.contact-section {
+    margin: 0 !important;
+}
+
+/* Contenedor centralizado */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+/* Header */
+header {
+    background: transparent;
+    box-shadow: none;
+    padding: 2.5rem 0 1.5rem 0;
+    border-bottom: 1px solid #ececec;
+}
+header h1 {
+    font-size: 2.8rem;
+    color: #181818;
+    letter-spacing: 0.02em;
+}
+
+/* Hero */
+.hero {
+    background: #fff;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 1rem 4rem 1rem;
+    border-bottom: 1px solid #ececec;
+}
+.hero h1 {
+    font-size: 4rem;
+    color: #181818;
+    margin-bottom: 1.2rem;
+}
+.hero p {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* Galería */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin: 3rem 0;
+}
+.gallery img,
+.gallery video {
+    width: 100%;
+    border-radius: 0;
+    object-fit: cover;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,0.04);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s cubic-bezier(.4,0,.2,1);
+}
+.gallery img:hover,
+.gallery video:hover {
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+}
+
+/* Gallery Section - Editorial Style */
+.gallery-section {
+    background: #fff;
+    padding: 5rem 0;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.2rem;
+    line-height: 1.1;
+}
+
+.gallery-subtitle {
+    font-family: 'Minion Pro', 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #666;
+    font-style: italic;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* CTA Button Container */
+.gallery-section .container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Gallery Masonry Styles - JavaScript-based Pinterest Layout */
+.gallery-masonry {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.gallery-item {
+    position: absolute;
+    width: calc(33.333% - 20px);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    transition: all 0.2s ease;
+    filter: grayscale(5%);
+    display: block;
+}
+
+.gallery-item img:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    filter: grayscale(0%);
+}
+
+/* Mobile Responsive for Masonry Gallery */
+@media (max-width: 768px) {
+    .gallery-masonry {
+        padding: 0 15px;
+    }
+    
+    .gallery-item {
+        width: calc(50% - 15px);
+        margin-bottom: 15px;
+    }
+    
+    .gallery-item img {
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-masonry {
+        padding: 0 10px;
+    }
+    
+    .gallery-item {
+        width: 100%;
+        margin-bottom: 12px;
+        position: relative !important;
+        left: 0 !important;
+        top: auto !important;
+    }
+    
+    .gallery-item img {
+        border-radius: 0;
+    }
+}
+
+/* Formulario de contacto */
+form {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
+    padding: 2.5rem 2rem;
+    margin: 3rem auto;
+    max-width: 500px;
+}
+form input,
+form textarea {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-family: 'minion-pro', 'Montserrat', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    background: #faf9f7;
+    color: #222;
+}
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+form button {
+    background: transparent;
+    color: #181818;
+    padding: 0.8rem 2rem;
+    border: 1px solid #181818;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-family: 'minion-pro', 'Montserrat', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+form button:hover {
+    background: #181818;
+    color: #fff;
+}
+
+/* Button Styles - Standardized */
+.cta-button, .view-gallery-btn, .inspiration-btn {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 12px 30px;
+    border: 1px solid #2c2c2c;
+    border-radius: 25px;
+    background: transparent;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.cta-button:hover, .view-gallery-btn:hover, .inspiration-btn:hover {
+    background: #2c2c2c;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Override for existing CTA button styles */
+.cta-button {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Footer */
+footer {
+    background: #fff;
+    color: #888;
+    text-align: center;
+    padding: 2rem 0 1rem 0;
+    font-size: 1rem;
+    border-top: 1px solid #ececec;
+    margin-top: 4rem;
+}
+
+/* Slider Styles */
+.slider-container {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    background: #000;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: none; /* Transitions will be controlled by JavaScript */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+/* Remove background-attachment for mobile performance */
+@media (min-width: 769px) {
+    .slide {
+        background-attachment: fixed;
+    }
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 3;
+    max-width: 90%;
+    width: 100%;
+    padding: 2rem;
+    background: transparent;
+    pointer-events: none;
+}
+
+.slide-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    color: #fff;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    color: #fff;
+}
+
+/* Slider Navigation - Hidden */
+.slider-arrow,
+.slider-nav,
+.slider-dots,
+.slider-bullets,
+.slider-pagination,
+.slider-controls,
+.slider-navigation,
+.prev,
+.next,
+.dots,
+.bullets,
+.navigation,
+.slider .navigation,
+.slider .dots,
+.slider .bullets,
+.slider .prev,
+.slider .next,
+.slider-container .navigation,
+.slider-container .dots,
+.slider-container .bullets,
+.slider-container .prev,
+.slider-container .next {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* --- Navegación principal flotante y menú móvil --- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1000;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.main-navigation .nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.5rem 2rem;
+}
+.logo a {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #222;
+  text-decoration: none;
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+.nav-menu {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu li a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  color: #222;
+  text-decoration: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 2px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-menu li a:hover {
+  background: #222;
+  color: #fff;
+}
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  gap: 5px;
+}
+.hamburger-menu span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #222;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 16px rgba(0,0,0,0.08);
+  z-index: 2000;
+  transition: right 0.35s cubic-bezier(.77,0,.18,1);
+  display: flex;
+  flex-direction: column;
+  padding-top: 4rem;
+}
+.mobile-sidebar.active {
+  right: 0;
+}
+.mobile-menu {
+  list-style: none;
+  padding: 0 2rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.mobile-menu li a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem;
+  color: #222;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+  transition: color 0.2s;
+}
+.mobile-menu li a:hover {
+  color: #b48a78;
+}
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+  .hamburger-menu {
+    display: flex;
+  }
+}
+@media (max-width: 900px) {
+  .site-header {
+    padding: 0;
+  }
+  .main-navigation .nav-container {
+    padding: 0.5rem 1rem;
+  }
+}
+body.menu-open {
+  overflow: hidden;
+}
+.site-main {
+  margin-top: 80px;
+}
+@media (max-width: 600px) {
+  .mobile-sidebar {
+    width: 100vw;
+    padding-top: 3.5rem;
+  }
+  .logo a {
+    font-size: 1.3rem;
+  }
+}
+
+/* --- Fix navegación flotante para landscape/tablet --- */
+@media (orientation: landscape) and (max-width: 1024px) {
+  .site-header {
+    padding: 0;
+  }
+  .main-navigation .nav-container {
+    padding: 0.5rem 1.5rem;
+  }
+  .nav-menu {
+    display: none;
+  }
+  .hamburger-menu {
+    display: flex;
+  }
+  .mobile-sidebar {
+    width: 350px;
+    padding-top: 3.5rem;
+  }
+}
+@media (orientation: landscape) and (max-width: 700px) {
+  .mobile-sidebar {
+    width: 100vw;
+  }
+}
+
+/* --- Fin navegación --- */
+
+/* JS para menú hamburguesa y sidebar */
+document.addEventListener('DOMContentLoaded', function() {
+  var hamburger = document.querySelector('.hamburger-menu');
+  var sidebar = document.querySelector('.mobile-sidebar');
+  var body = document.body;
+  if (hamburger && sidebar) {
+    hamburger.addEventListener('click', function() {
+      sidebar.classList.toggle('active');
+      body.classList.toggle('menu-open');
+    });
+    sidebar.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        sidebar.classList.remove('active');
+        body.classList.remove('menu-open');
+      });
+    });
+  }
+});
+
+/* About Photographer Section */
+.about-photographer {
+    background: #fff;
+    padding: 5rem 0;
+    margin: 0;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    border: 8px solid #f8f5f2;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: filter 0.3s ease;
+}
+
+.about-image img:hover {
+    filter: grayscale(0%);
+}
+
+.about-text {
+    padding: 2rem 0;
+}
+
+.about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.about-text p {
+    font-family: 'Minion Pro', 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1.2rem;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Photographer Profile Section */
+.photographer-profile {
+    padding: 5rem 0;
+    background: #fff;
+    text-align: center;
+    margin: 0;
+}
+
+.profile-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.profile-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    margin-bottom: 1rem;
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+}
+
+.profile-main-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: #8B7355;
+}
+
+.profile-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #8B7355;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.profile-image-container {
+    margin: 40px 0;
+}
+
+.profile-image {
+    width: 280px;
+    height: 320px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    border: 8px solid #fff;
+    box-shadow: 0 0 0 1px #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.profile-tagline {
+    margin: 50px 0 30px;
+}
+
+.tagline-text {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #666;
+    padding: 12px 30px;
+    border: 1px solid #d0d0d0;
+    border-radius: 50px;
+    background: #fff;
+    position: relative;
+}
+
+.profile-divider {
+    width: 80px;
+    height: 1px;
+    background: #d0d0d0;
+    margin: 30px auto;
+}
+
+.profile-location {
+    font-family: 'Minion Pro', 'Georgia', serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #666;
+    letter-spacing: 1.5px;
+    margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .photographer-profile {
+        padding: 60px 20px;
+    }
+    
+    .profile-main-title {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+    
+    .profile-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .profile-image {
+        width: 220px;
+        height: 260px;
+        border-width: 6px;
+    }
+    
+    .tagline-text {
+        font-size: 1rem;
+        padding: 10px 25px;
+    }
+    
+    .profile-location {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-main-title {
+        font-size: 1.8rem;
+    }
+    
+    .profile-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .profile-image {
+        width: 180px;
+        height: 220px;
+    }
+}
+
+/* Mobile Styles - Tablet */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* Slider Mobile Styles */
+    .slider {
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+    
+    .slide-content {
+        max-width: 90%;
+        padding: 0 1rem;
+    }
+    
+    .slide-content h2 {
+        font-size: 2.4rem;
+        line-height: 1.1;
+        letter-spacing: 0.01em;
+    }
+    
+    /* Content Sections */
+    .container {
+        padding: 2rem 1rem;
+    }
+    
+    /* About Section Mobile */
+    .about-photographer {
+        padding: 3rem 0;
+        margin: 0;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .about-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .about-text p {
+        font-size: 0.95rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+        margin-top: 1.5rem;
+    }
+    
+    /* Gallery Mobile */
+    .gallery-section {
+        padding: 3rem 0;
+    }
+    
+    .gallery-header {
+        margin-bottom: 2.5rem;
+    }
+    
+    .gallery-main-title {
+        font-size: 2rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 1rem;
+    }
+    
+    .gallery-subtitle {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .cta-button, .view-gallery-btn, .inspiration-btn {
+        padding: 10px 25px;
+        font-size: 0.75rem;
+        letter-spacing: 1.2px;
+    }
+    
+    /* Form Mobile */
+    form {
+        padding: 2rem 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    form input,
+    form textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 0.8rem;
+    }
+    
+    form button {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* Mobile Styles - Phone */
+@media (max-width: 480px) {
+    body {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+    
+    /* Slider Phone Styles */
+    .slider {
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+    
+    .slide-content {
+        max-width: 85%;
+        padding: 0 0.5rem;
+    }
+    
+    .slide-content h2 {
+        font-size: 1.8rem;
+        line-height: 1.1;
+        margin-bottom: 0;
+        letter-spacing: 0.01em;
+        text-shadow: 2px 2px 12px rgba(0,0,0,0.8);
+    }
+    
+    /* Content Sections Phone */
+    .container {
+        padding: 1.5rem 0.5rem;
+    }
+    
+    /* About Section Phone */
+    .about-photographer {
+        padding: 2rem 0;
+        margin: 0;
+    }
+    
+    .about-content {
+        gap: 2rem;
+    }
+    
+    .about-text h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .about-text p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        line-height: 1.1;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+        margin-top: 1rem;
+    }
+    
+    p {
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Gallery Phone */
+    .gallery-section {
+        padding: 2rem 0;
+    }
+    
+    .gallery-header {
+        margin-bottom: 2rem;
+    }
+    
+    .gallery-main-title {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        margin-bottom: 0.8rem;
+    }
+    
+    .gallery-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
+    .cta-button, .view-gallery-btn, .inspiration-btn {
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+    
+    /* Form Phone */
+    form {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    form input,
+    form textarea {
+        font-size: 16px;
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    form textarea {
+        min-height: 100px;
+    }
+    
+    form button {
+        width: 100%;
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Mobile Styles - Small Phone */
+@media (max-width: 360px) {
+    .slide-content h2 {
+        font-size: 1.8rem;
+        line-height: 1.05;
+        text-shadow: 2px 2px 15px rgba(0,0,0,0.9);
+    }
+    
+    .container {
+        padding: 1rem 0.25rem;
+    }
+    
+    h1 {
+        font-size: 1.9rem;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    form {
+        padding: 1rem 0.5rem;
+    }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+    .slider {
+        height: 100vh;
+        height: 100dvh;
+    }
+    
+    .slide-content h2 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .container {
+        padding: 1.5rem 0.5rem;
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+    }
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    form {
+        padding: 1.2rem 0.5rem;
+    }
+}
+
+/* Hide page title on front page */
+body.home header,
+body.front-page header {
+    display: none;
+}
+
+/* Adjust main content spacing when header is hidden */
+body.home .site-main,
+body.front-page .site-main {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Photos that Feel like Memories Section */
+.photos-memories-section {
+    padding: 100px 0;
+    background: #f8f8f8;
+}
+
+.memories-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.memories-text {
+    max-width: 500px;
+}
+
+.memories-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.memories-title em {
+    font-style: italic;
+    color: #8B7355;
+    font-weight: 300;
+    font-size: 2rem;
+}
+
+.memories-description {
+    font-family: 'Minion Pro', 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+    text-align: left;
+}
+
+.memories-image {
+    display: flex;
+    justify-content: center;
+}
+
+.memories-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.memories-cta {
+    text-align: center;
+}
+
+.view-gallery-btn {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 15px 40px;
+    border: 1px solid #2c2c2c;
+    border-radius: 30px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.view-gallery-btn:hover {
+    background: #2c2c2c;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Inspirational Quote Section */
+.inspirational-quote-section {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #666; /* Fallback color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.quote-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+}
+
+.quote-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 0 2rem;
+    color: #fff;
+}
+
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.quote-text em {
+    font-style: italic;
+    color: #f8f5f2;
+    font-weight: 400;
+}
+
+.quote-author {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f0f0f0;
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* Remove fixed background on mobile for better performance */
+@media (max-width: 768px) {
+    .inspirational-quote-section {
+        background-attachment: scroll;
+        height: 50vh;
+        min-height: 350px;
+    }
+    
+    .quote-text {
+        font-size: 2rem;
+        line-height: 1.1;
+    }
+    
+    .quote-author {
+        font-size: 0.9rem;
+        letter-spacing: 1.5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inspirational-quote-section {
+        height: 45vh;
+        min-height: 300px;
+    }
+    
+    .quote-content {
+        padding: 0 1rem;
+    }
+    
+    .quote-text {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
+    
+    .quote-author {
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+}
+
+/* Sources of Inspiration Section */
+.sources-inspiration-section {
+    background: #f8f8f8;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.inspiration-content {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inspiration-text {
+    text-align: center;
+    max-width: 500px;
+    z-index: 10;
+    position: relative;
+    background: rgba(248, 248, 248, 0.9);
+    padding: 40px;
+    border-radius: 0;
+}
+
+.inspiration-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.inspiration-title em {
+    font-style: italic;
+    color: #8B7355;
+    font-weight: 300;
+    text-transform: lowercase;
+}
+
+.inspiration-description {
+    font-family: 'Minion Pro', 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.inspiration-btn {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 15px 35px;
+    border: 1px solid #2c2c2c;
+    border-radius: 30px;
+    background: transparent;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.inspiration-btn:hover {
+    background: #2c2c2c;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Floating Images */
+.floating-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-image {
+    position: absolute;
+    opacity: 0;
+    animation: floatIn 1s ease-out forwards;
+}
+
+.floating-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    filter: grayscale(20%);
+    transition: all 0.2s ease;
+}
+
+.floating-image:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+}
+
+/* Positioning for floating images - Now controlled by JavaScript */
+.floating-image {
+    position: absolute;
+    opacity: 0;
+    animation: floatIn 1s ease-out forwards;
+    transition: all 0.2s ease;
+}
+
+/* Remove fixed positioning - JavaScript will handle all positioning */
+.floating-image.image-1,
+.floating-image.image-2,
+.floating-image.image-3,
+.floating-image.image-4,
+.floating-image.image-5 {
+    position: absolute;
+    animation-delay: 0.2s;
+}
+
+.floating-image.image-2 { animation-delay: 0.4s; }
+.floating-image.image-3 { animation-delay: 0.6s; }
+.floating-image.image-4 { animation-delay: 0.8s; }
+.floating-image.image-5 { animation-delay: 1s; }
+
+@keyframes floatIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Contact Section */
+.contact-section {
+    background: #f8f5f2;
+    padding: 100px 0;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    filter: grayscale(40%);
+    transition: filter 0.3s ease;
+}
+
+.contact-image img:hover {
+    filter: grayscale(0%);
+}
+
+.contact-text {
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+.contact-subtitle {
+    font-family: 'Minion Pro', 'Georgia', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.contact-divider {
+    width: 60px;
+    height: 1px;
+    background: #d0d0d0;
+    margin: 2rem auto;
+}
+
+.contact-btn {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #2c2c2c;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 15px 35px;
+    border: 1px solid #2c2c2c;
+    border-radius: 25px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: #2c2c2c;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 0;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .contact-title {
+        font-size: 2rem;
+        letter-spacing: 1.5px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-text {
+        padding: 0 1rem;
+    }
+    
+    .contact-btn {
+        font-size: 0.75rem;
+        padding: 12px 30px;
+        letter-spacing: 1.2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-title {
+        font-size: 1.8rem;
+        letter-spacing: 1px;
+    }
+    
+    .contact-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .contact-btn {
+        width: 100%;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive handling for floating images */
+@media (max-width: 768px) {
+    .sources-inspiration-section {
+        padding: 80px 0;
+    }
+    
+    .inspiration-content {
+        min-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sources-inspiration-section {
+        padding: 60px 0;
+    }
+    
+    .inspiration-content {
+        min-height: 300px;
+    }
+    
+    .floating-images {
+        display: none; /* Hide floating images on very small screens */
+    }
+    
+    .inspiration-text {
+        background: rgba(248, 248, 248, 1);
+        padding: 30px 20px;
+    }
+}
+
+/* Slider loading and preload optimization */
+.slider-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.slider-container.loaded::before {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Slide preload */
+.slide {
+    will-change: opacity;
+    transform: translateZ(0); /* Enable hardware acceleration */
+}
+
+/* Loading animation for slider */
+.slider-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    z-index: 101;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Performance optimization - Remove fixed background on mobile */
+@media (max-width: 768px) {
+    .slide {
+        background-attachment: scroll !important;
+        transform: translate3d(0,0,0); /* Force GPU acceleration */
+    }
+}
