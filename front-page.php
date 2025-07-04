@@ -8,34 +8,381 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header(); ?>
 
-<header class="site-header">
-    <nav class="main-navigation">
-        <div class="nav-container">
-            <div class="logo">
-                <a href="/">Arrebol</a>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/galeria">Galería</a></li>
-                <li><a href="/el-proceso">El Proceso</a></li>
-                <li><a href="/contacto">Contacto</a></li>
-            </ul>
-            <div class="hamburger-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-    <div class="mobile-sidebar">
-        <ul class="mobile-menu">
-            <li><a href="/">Inicio</a></li>
-            <li><a href="/galeria">Galería</a></li>
-            <li><a href="/el-proceso">El Proceso</a></li>
-            <li><a href="/contacto">Contacto</a></li>
-        </ul>
+<!-- Eliminar espacio beige arriba del slider - Solución específica -->
+<style>
+/* Eliminar completamente cualquier espacio arriba del slider */
+html {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Ocultar admin bar de WordPress */
+#wpadminbar {
+    display: none !important;
+}
+
+/* Eliminar margin que WordPress puede añadir */
+body.admin-bar {
+    margin-top: 0 !important;
+}
+
+/* Asegurar que el contenedor principal no tenga espacios */
+.site-main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Forzar que el slider comience exactamente desde arriba */
+.slider-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    position: relative;
+    top: 0;
+}
+
+/* Eliminar cualquier espacio del header si lo hay */
+header {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Eliminar espacios de cualquier elemento antes del slider */
+.slider-container::before {
+    display: none !important;
+}
+</style>
+
+<!-- Forzar posición con JavaScript para asegurar que no hay espacio -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Eliminar cualquier espacio arriba del slider
+    const slider = document.querySelector('.slider-container');
+    if (slider) {
+        slider.style.marginTop = '0';
+        slider.style.paddingTop = '0';
+        slider.style.position = 'relative';
+        slider.style.top = '0';
+        
+        // Asegurar que el body no tenga márgenes
+        document.body.style.marginTop = '0';
+        document.body.style.paddingTop = '0';
+        document.documentElement.style.marginTop = '0';
+        document.documentElement.style.paddingTop = '0';
+        
+        console.log('✅ Espacios eliminados del slider');
+    }
+});
+</script>
+
+<!-- MENÚ MINIMALISTA CON SCROLL DETECTION -->
+<!-- El botón del menú - Solo aparece después del scroll -->
+<button id="menu-btn" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(8px);
+">
+    <div class="hamburger-line" style="
+        width: 24px;
+        height: 2px;
+        background: #333;
+        margin: 3px 0;
+        transition: all 0.3s ease;
+        border-radius: 1px;
+    "></div>
+    <div class="hamburger-line" style="
+        width: 24px;
+        height: 2px;
+        background: #333;
+        margin: 3px 0;
+        transition: all 0.3s ease;
+        border-radius: 1px;
+    "></div>
+    <div class="hamburger-line" style="
+        width: 24px;
+        height: 2px;
+        background: #333;
+        margin: 3px 0;
+        transition: all 0.3s ease;
+        border-radius: 1px;
+    "></div>
+</button>
+
+<!-- Backdrop del menú -->
+<div id="menu-backdrop" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f8f8f8;
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+"></div>
+
+<!-- Menú fullscreen -->
+<div id="fullscreen-menu" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    background: #f8f8f8;
+">
+    <div style="text-align: center;">
+        <nav>
+            <a href="<?php echo home_url('/'); ?>" class="menu-item" style="
+                display: block;
+                font-size: 1.1rem;
+                margin: 40px 0;
+                color: #666;
+                text-decoration: none;
+                font-weight: 400;
+                text-align: center;
+                letter-spacing: 8px;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                opacity: 0;
+                transform: translateY(30px);
+                font-family: 'Inter', sans-serif;
+            ">INICIO</a>
+            <a href="<?php echo home_url('/galeria'); ?>" class="menu-item" style="
+                display: block;
+                font-size: 1.1rem;
+                margin: 40px 0;
+                color: #666;
+                text-decoration: none;
+                font-weight: 400;
+                text-align: center;
+                letter-spacing: 8px;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                opacity: 0;
+                transform: translateY(30px);
+                font-family: 'Inter', sans-serif;
+            ">GALERÍA</a>
+            <a href="<?php echo home_url('/el-proceso'); ?>" class="menu-item" style="
+                display: block;
+                font-size: 1.1rem;
+                margin: 40px 0;
+                color: #666;
+                text-decoration: none;
+                font-weight: 400;
+                text-align: center;
+                letter-spacing: 8px;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                opacity: 0;
+                transform: translateY(30px);
+                font-family: 'Inter', sans-serif;
+            ">EL PROCESO</a>
+            <a href="<?php echo home_url('/contacto'); ?>" class="menu-item" style="
+                display: block;
+                font-size: 1.1rem;
+                margin: 40px 0;
+                color: #666;
+                text-decoration: none;
+                font-weight: 400;
+                text-align: center;
+                letter-spacing: 8px;
+                text-transform: uppercase;
+                transition: all 0.3s ease;
+                opacity: 0;
+                transform: translateY(30px);
+                font-family: 'Inter', sans-serif;
+            ">CONTACTO</a>
+        </nav>
     </div>
-</header>
+</div>
+
+<style>
+/* Hover effects y animaciones */
+#menu-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Animación del botón cuando el menú está abierto */
+#menu-btn.is-open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+#menu-btn.is-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-btn.is-open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Animaciones del menú abierto */
+#fullscreen-menu.is-open .menu-item {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+#fullscreen-menu.is-open .menu-item:nth-child(1) { transition-delay: 0.1s; }
+#fullscreen-menu.is-open .menu-item:nth-child(2) { transition-delay: 0.2s; }
+#fullscreen-menu.is-open .menu-item:nth-child(3) { transition-delay: 0.3s; }
+#fullscreen-menu.is-open .menu-item:nth-child(4) { transition-delay: 0.4s; }
+
+.menu-item:hover {
+    color: #333 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* === ELEGANCIA AÑADIDA === */
+
+/* Línea decorativa superior */
+#fullscreen-menu::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ccc, transparent);
+    opacity: 0.6;
+}
+
+/* Línea decorativa inferior */
+#fullscreen-menu::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ccc, transparent);
+    opacity: 0.6;
+}
+
+/* Efecto de entrada más suave para las líneas decorativas */
+#fullscreen-menu.is-open::before,
+#fullscreen-menu.is-open::after {
+    animation: fadeInLine 0.8s ease-out 0.5s both;
+}
+
+@keyframes fadeInLine {
+    from {
+        opacity: 0;
+        width: 20px;
+    }
+    to {
+        opacity: 0.6;
+        width: 60px;
+    }
+}
+
+/* Mejorar el hover de los enlaces */
+.menu-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 100%;
+    height: 1px;
+    background: #333;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover::before {
+    transform: translateX(-50%) scaleX(0.3);
+}
+
+/* Efecto de cristal para el botón del menú */
+#menu-btn {
+    backdrop-filter: blur(10px) saturate(200%);
+    background: rgba(255, 255, 255, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Sombra más elegante para el fondo del menú */
+#menu-backdrop {
+    background: #f8f8f8;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(240, 240, 240, 0.2) 0%, transparent 50%);
+}
+
+/* Animación de entrada para el backdrop */
+#menu-backdrop.is-open {
+    animation: backdropFade 0.4s ease-out;
+}
+
+@keyframes backdropFade {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Texto más elegante con mejor kerning */
+.menu-item {
+    font-kerning: auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Efecto de brillo sutil al hacer hover */
+.menu-item:hover {
+    text-shadow: 0 0 20px rgba(51, 51, 51, 0.1);
+}
+
+/* Pulse sutil para el botón del menú */
+@keyframes menuPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+#menu-btn:focus {
+    animation: menuPulse 2s infinite;
+    outline: none;
+}
+</style>
 
 <main class="site-main">
     <section class="slider-container">

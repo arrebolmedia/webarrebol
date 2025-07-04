@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test del Menú Minimalista</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .test-slider {
+            height: 100vh;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #666;
+        }
+        
+        .test-content {
+            height: 200vh;
+            padding: 2rem;
+            background: #fff;
+        }
+        
+        /* --- Estilos del menú --- */
+        #menu-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 10000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        
+        .hamburger-line {
+            width: 24px;
+            height: 2px;
+            background: #333;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+        
+        #menu-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        #fullscreen-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        /* Hover effects y animaciones */
+        #menu-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Animación del botón cuando el menú está abierto */
+        #menu-btn.is-open .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        #menu-btn.is-open .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+        
+        #menu-btn.is-open .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .menu-item {
+            display: block;
+            font-size: 2.5rem;
+            margin: 25px 0;
+            color: #333;
+            text-decoration: none;
+            font-weight: 300;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        /* Animaciones del menú abierto */
+        #fullscreen-menu.is-open .menu-item {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        #fullscreen-menu.is-open .menu-item:nth-child(1) { transition-delay: 0.1s; }
+        #fullscreen-menu.is-open .menu-item:nth-child(2) { transition-delay: 0.2s; }
+        #fullscreen-menu.is-open .menu-item:nth-child(3) { transition-delay: 0.3s; }
+        #fullscreen-menu.is-open .menu-item:nth-child(4) { transition-delay: 0.4s; }
+        
+        .menu-item:hover {
+            color: #c46f4c !important;
+            transform: translateY(-5px) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- El botón del menú - Solo aparece después del scroll -->
+    <button id="menu-btn">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </button>
+
+    <!-- Backdrop del menú -->
+    <div id="menu-backdrop"></div>
+
+    <!-- Menú fullscreen -->
+    <div id="fullscreen-menu">
+        <div style="text-align: center;">
+            <h1 style="font-size: 1rem; margin-bottom: 3rem; color: #999; font-weight: 300; letter-spacing: 3px; text-transform: uppercase;">Navegación</h1>
+            
+            <nav>
+                <a href="#" class="menu-item">Inicio</a>
+                <a href="#" class="menu-item">Galería</a>
+                <a href="#" class="menu-item">El Proceso</a>
+                <a href="#" class="menu-item">Contacto</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Test slider -->
+    <div class="test-slider">
+        📸 Slider de prueba - Haz scroll hacia abajo para ver el menú
+    </div>
+    
+    <!-- Test content -->
+    <div class="test-content">
+        <h1>Contenido de prueba</h1>
+        <p>Haz scroll hacia arriba y verás que el menú aparece después del slider.</p>
+        <p>El menú tiene un ícono minimalista de 3 líneas horizontales.</p>
+        <p>Puedes cerrarlo haciendo clic en el ícono, presionando ESC, o haciendo clic en el fondo.</p>
+        
+        <h2>Características del menú:</h2>
+        <ul>
+            <li>✅ Ícono minimalista de 3 líneas (no emoji hamburguesa)</li>
+            <li>✅ Solo aparece después del scroll</li>
+            <li>✅ Fondo sólido que cubre toda la pantalla</li>
+            <li>✅ Se puede cerrar con el ícono, ESC, o fondo</li>
+            <li>✅ Animaciones suaves y elegantes</li>
+            <li>✅ Diseño sobrio y minimalista</li>
+        </ul>
+    </div>
+
+    <script src="js/menu.js"></script>
+</body>
+</html>
