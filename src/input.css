@@ -21,17 +21,38 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-playfair);
 }
 
-/* Custom component styles */
+/* Menu component styles */
 .menu-item {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-family: var(--font-inter);
-  font-size: 0.875rem;
-  transition: color 0.3s ease;
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .menu-item:hover {
   color: var(--color-arrebol-accent);
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Menu item underline effect */
+.menu-item::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 40px;
+  height: 2px;
+  background: var(--color-arrebol-accent);
+  transition: transform 0.3s ease;
+  border-radius: 1px;
+}
+
+.menu-item:hover::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 /* Button styles */
@@ -42,10 +63,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   letter-spacing: 0.05em;
   transition: all 0.3s ease;
+  border-radius: 0.5rem;
 }
 
 .btn-elegant:hover {
   background-color: rgba(212, 175, 55, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
 }
 
 /* Section spacing */
@@ -66,4 +90,33 @@ h1, h2, h3, h4, h5, h6 {
 
 .backdrop-blur-subtle {
   backdrop-filter: blur(10px);
+}
+
+/* Font family utilities */
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+/* Custom hover color for menu items */
+.hover\:text-arrebol-accent:hover {
+  color: var(--color-arrebol-accent);
+}
+
+/* Menu backdrop gradient effect */
+.menu-backdrop-gradient {
+  background: linear-gradient(135deg, 
+    rgba(245, 243, 240, 0.98) 0%, 
+    rgba(255, 255, 255, 0.95) 50%, 
+    rgba(245, 243, 240, 0.98) 100%);
+}
+
+/* Smooth font rendering */
+.text-smooth {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }

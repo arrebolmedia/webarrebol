@@ -79,160 +79,88 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<!-- MENÚ MINIMALISTA CON SCROLL DETECTION -->
-<!-- El botón del menú - Solo aparece después del scroll -->
-<button id="menu-btn" style="
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 10000;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(8px);
-">
-    <div class="hamburger-line" style="
-        width: 24px;
-        height: 2px;
-        background: #333;
-        margin: 3px 0;
-        transition: all 0.3s ease;
-        border-radius: 1px;
-    "></div>
-    <div class="hamburger-line" style="
-        width: 24px;
-        height: 2px;
-        background: #333;
-        margin: 3px 0;
-        transition: all 0.3s ease;
-        border-radius: 1px;
-    "></div>
-    <div class="hamburger-line" style="
-        width: 24px;
-        height: 2px;
-        background: #333;
-        margin: 3px 0;
-        transition: all 0.3s ease;
-        border-radius: 1px;
-    "></div>
+<!-- MENÚ MINIMALISTA CON TAILWIND CSS -->
+<!-- Botón del menú con clases de Tailwind -->
+<button 
+    id="menu-btn" 
+    class="fixed top-5 right-5 w-12 h-12 bg-white/95 backdrop-blur-sm border-none rounded-lg cursor-pointer z-50 hidden flex-col items-center justify-center shadow-lg transition-all duration-300 opacity-0 transform translate-y-2 hover:-translate-y-0.5 hover:shadow-xl group"
+>
+    <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
+    <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
+    <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
 </button>
 
-<!-- Backdrop del menú -->
-<div id="menu-backdrop" style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #f8f8f8;
-    z-index: 9998;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-"></div>
+<!-- Backdrop del menú con Tailwind -->
+<div 
+    id="menu-backdrop" 
+    class="fixed inset-0 menu-backdrop-gradient z-40 opacity-0 invisible transition-all duration-500 ease-out backdrop-blur-sm"
+></div>
 
-<!-- Menú fullscreen -->
-<div id="fullscreen-menu" style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-    background: #f8f8f8;
-">
-    <div style="text-align: center;">
-        <nav>
-            <a href="<?php echo home_url('/'); ?>" class="menu-item" style="
-                display: block;
-                font-size: 1.1rem;
-                margin: 40px 0;
-                color: #666;
-                text-decoration: none;
-                font-weight: 400;
-                text-align: center;
-                letter-spacing: 8px;
-                text-transform: uppercase;
-                transition: all 0.3s ease;
-                opacity: 0;
-                transform: translateY(30px);
-                font-family: 'Inter', sans-serif;
-            ">INICIO</a>
-            <a href="<?php echo home_url('/galeria'); ?>" class="menu-item" style="
-                display: block;
-                font-size: 1.1rem;
-                margin: 40px 0;
-                color: #666;
-                text-decoration: none;
-                font-weight: 400;
-                text-align: center;
-                letter-spacing: 8px;
-                text-transform: uppercase;
-                transition: all 0.3s ease;
-                opacity: 0;
-                transform: translateY(30px);
-                font-family: 'Inter', sans-serif;
-            ">GALERÍA</a>
-            <a href="<?php echo home_url('/el-proceso'); ?>" class="menu-item" style="
-                display: block;
-                font-size: 1.1rem;
-                margin: 40px 0;
-                color: #666;
-                text-decoration: none;
-                font-weight: 400;
-                text-align: center;
-                letter-spacing: 8px;
-                text-transform: uppercase;
-                transition: all 0.3s ease;
-                opacity: 0;
-                transform: translateY(30px);
-                font-family: 'Inter', sans-serif;
-            ">EL PROCESO</a>
-            <a href="<?php echo home_url('/contacto'); ?>" class="menu-item" style="
-                display: block;
-                font-size: 1.1rem;
-                margin: 40px 0;
-                color: #666;
-                text-decoration: none;
-                font-weight: 400;
-                text-align: center;
-                letter-spacing: 8px;
-                text-transform: uppercase;
-                transition: all 0.3s ease;
-                opacity: 0;
-                transform: translateY(30px);
-                font-family: 'Inter', sans-serif;
-            ">CONTACTO</a>
+<!-- Menú fullscreen con Tailwind -->
+<div 
+    id="fullscreen-menu" 
+    class="fixed inset-0 z-50 flex flex-col items-center justify-center opacity-0 invisible transition-all duration-500 ease-out menu-backdrop-gradient"
+>
+    <div class="text-center space-y-8">
+        <nav class="space-y-6">
+            <a 
+                href="<?php echo home_url('/'); ?>" 
+                class="menu-item block text-gray-600 no-underline font-medium text-center tracking-widest opacity-0 transform translate-y-8 hover:text-arrebol-accent font-inter text-smooth"
+            >
+                INICIO
+            </a>
+            <a 
+                href="<?php echo home_url('/galeria'); ?>" 
+                class="menu-item block text-gray-600 no-underline font-medium text-center tracking-widest opacity-0 transform translate-y-8 hover:text-arrebol-accent font-inter text-smooth"
+            >
+                GALERÍA
+            </a>
+            <a 
+                href="<?php echo home_url('/el-proceso'); ?>" 
+                class="menu-item block text-gray-600 no-underline font-medium text-center tracking-widest opacity-0 transform translate-y-8 hover:text-arrebol-accent font-inter text-smooth"
+            >
+                EL PROCESO
+            </a>
+            <a 
+                href="<?php echo home_url('/nosotros'); ?>" 
+                class="menu-item block text-gray-600 no-underline font-medium text-center tracking-widest opacity-0 transform translate-y-8 hover:text-arrebol-accent font-inter text-smooth"
+            >
+                NOSOTROS
+            </a>
+            <a 
+                href="<?php echo home_url('/contacto'); ?>" 
+                class="menu-item block text-gray-600 no-underline font-medium text-center tracking-widest opacity-0 transform translate-y-8 hover:text-arrebol-accent font-inter text-smooth"
+            >
+                CONTACTO
+            </a>
         </nav>
+        
+        <!-- Información adicional del menú -->
+        <div class="mt-12 opacity-0 transform translate-y-8 transition-all duration-500 delay-300" id="menu-info">
+            <div class="text-xs text-gray-400 tracking-wide font-light">
+                ARREBOL MEDIA
+            </div>
+            <div class="text-xs text-gray-400 mt-1">
+                Fotografía & Video
+            </div>
+        </div>
     </div>
+    
+    <!-- Botón de cerrar -->
+    <button 
+        id="menu-close" 
+        class="absolute top-5 right-5 w-10 h-10 bg-transparent border-none cursor-pointer text-gray-400 hover:text-gray-600 transition-colors duration-300"
+    >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
 </div>
 
 <style>
-/* Hover effects y animaciones */
-#menu-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
+/* Estilos adicionales para el menú con Tailwind */
 
-/* Animación del botón cuando el menú está abierto */
+/* Animación del botón hamburguesa cuando el menú está abierto */
 #menu-btn.is-open .hamburger-line:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -245,126 +173,57 @@ document.addEventListener('DOMContentLoaded', function() {
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
-/* Animaciones del menú abierto */
+/* Animaciones de entrada para los elementos del menú */
 #fullscreen-menu.is-open .menu-item {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
 
+#fullscreen-menu.is-open #menu-info {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Delays escalonados para crear efecto cascada */
 #fullscreen-menu.is-open .menu-item:nth-child(1) { transition-delay: 0.1s; }
-#fullscreen-menu.is-open .menu-item:nth-child(2) { transition-delay: 0.2s; }
-#fullscreen-menu.is-open .menu-item:nth-child(3) { transition-delay: 0.3s; }
-#fullscreen-menu.is-open .menu-item:nth-child(4) { transition-delay: 0.4s; }
+#fullscreen-menu.is-open .menu-item:nth-child(2) { transition-delay: 0.15s; }
+#fullscreen-menu.is-open .menu-item:nth-child(3) { transition-delay: 0.2s; }
+#fullscreen-menu.is-open .menu-item:nth-child(4) { transition-delay: 0.25s; }
+#fullscreen-menu.is-open .menu-item:nth-child(5) { transition-delay: 0.3s; }
 
-.menu-item:hover {
-    color: #333 !important;
-    transform: translateY(-2px) !important;
+/* Estados activos para backdrop y menú */
+#menu-backdrop.is-open,
+#fullscreen-menu.is-open {
+    opacity: 1;
+    visibility: visible;
 }
 
-/* === ELEGANCIA AÑADIDA === */
-
-/* Línea decorativa superior */
-#fullscreen-menu::before {
-    content: '';
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #ccc, transparent);
-    opacity: 0.6;
+/* Suavizado de fuentes */
+.font-inter {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Línea decorativa inferior */
-#fullscreen-menu::after {
-    content: '';
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #ccc, transparent);
-    opacity: 0.6;
+/* Colores personalizados para hover */
+.hover\\:text-yellow-600:hover {
+    color: #d4af37 !important;
 }
 
-/* Efecto de entrada más suave para las líneas decorativas */
-#fullscreen-menu.is-open::before,
-#fullscreen-menu.is-open::after {
-    animation: fadeInLine 0.8s ease-out 0.5s both;
-}
-
-@keyframes fadeInLine {
-    from {
-        opacity: 0;
-        width: 20px;
-    }
-    to {
-        opacity: 0.6;
-        width: 60px;
-    }
-}
-
-/* Mejorar el hover de los enlaces */
-.menu-item {
-    position: relative;
-    overflow: hidden;
-}
-
-.menu-item::before {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%) scaleX(0);
-    width: 100%;
-    height: 1px;
-    background: #333;
-    transition: transform 0.3s ease;
-}
-
-.menu-item:hover::before {
-    transform: translateX(-50%) scaleX(0.3);
-}
-
-/* Efecto de cristal para el botón del menú */
-#menu-btn {
-    backdrop-filter: blur(10px) saturate(200%);
-    background: rgba(255, 255, 255, 0.85) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Sombra más elegante para el fondo del menú */
-#menu-backdrop {
-    background: #f8f8f8;
-    background-image: 
-        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(240, 240, 240, 0.2) 0%, transparent 50%);
-}
-
-/* Animación de entrada para el backdrop */
+/* Efecto de entrada suave para el backdrop */
 #menu-backdrop.is-open {
-    animation: backdropFade 0.4s ease-out;
+    animation: fadeInBackdrop 0.5s ease-out;
 }
 
-@keyframes backdropFade {
+@keyframes fadeInBackdrop {
     from {
         opacity: 0;
-        transform: scale(1.05);
+        backdrop-filter: blur(0px);
     }
     to {
         opacity: 1;
-        transform: scale(1);
+        backdrop-filter: blur(4px);
     }
-}
-
-/* Texto más elegante con mejor kerning */
-.menu-item {
-    font-kerning: auto;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Efecto de brillo sutil al hacer hover */
