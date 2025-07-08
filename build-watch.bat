@@ -1,0 +1,3 @@
+@echo off
+echo Iniciando Tailwind CSS en modo watch...
+npm run build-css

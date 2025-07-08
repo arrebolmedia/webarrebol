@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* Custom styles for Arrebol Theme */
+:root {
+  --color-arrebol-beige: #f5f3f0;
+  --color-arrebol-dark: #2c2c2c;
+  --color-arrebol-accent: #d4af37;
+  --color-arrebol-light: #ffffff;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+}
+
+/* Custom base styles */
+body {
+  font-family: var(--font-inter);
+  color: var(--color-arrebol-dark);
+  background-color: var(--color-arrebol-beige);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair);
+}
+
+/* Custom component styles */
+.menu-item {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.menu-item:hover {
+  color: var(--color-arrebol-accent);
+}
+
+/* Button styles */
+.btn-elegant {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-arrebol-accent);
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-elegant:hover {
+  background-color: rgba(212, 175, 55, 0.9);
+}
+
+/* Section spacing */
+.section-spacing {
+  padding: 4rem 0;
+}
+
+@media (min-width: 1024px) {
+  .section-spacing {
+    padding: 6rem 0;
+  }
+}
+
+/* Utility classes */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.backdrop-blur-subtle {
+  backdrop-filter: blur(10px);
+}

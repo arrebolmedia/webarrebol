@@ -12,11 +12,11 @@ add_action('after_setup_theme', 'arrebol_theme_setup');
 function arrebol_theme_enqueue_scripts() {
     wp_enqueue_style('arrebol-style', get_stylesheet_uri());
     
-    // Cargar Tailwind CSS desde CDN
-    wp_enqueue_style('tailwind', 'https://cdn.tailwindcss.com');
+    // Cargar Tailwind CSS local en lugar del CDN
+    wp_enqueue_style('tailwind-local', get_template_directory_uri() . '/assets/css/tailwind.css', array(), '1.0');
     
     // Cargar Google Fonts
-    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap', array(), null);
+    wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap', array(), null);
     
     // Enqueue slider JavaScript (necesario para el slider)
     wp_enqueue_script('arrebol-slider', get_template_directory_uri() . '/js/slider.js', array(), '1.0', true);
