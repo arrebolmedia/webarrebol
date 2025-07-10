@@ -32,16 +32,34 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    // Debug inicial - verificar que el slider existe
+    if (slider) {
+        console.log('🎬 Slider encontrado:', {
+            height: slider.offsetHeight,
+            classList: slider.classList.toString()
+        });
+    } else {
+        console.warn('⚠️ Slider no encontrado, usando altura de ventana');
+    }
+
     // --- Control de visibilidad del botón del menú basado en scroll ---
     function handleScroll() {
         const scrollPosition = window.scrollY;
         const sliderHeight = slider ? slider.offsetHeight : window.innerHeight;
-        const showMenuThreshold = sliderHeight * 0.8; // Mostrar cuando se ha scrolleado 80% del slider
+        const showMenuThreshold = sliderHeight * 0.5; // Mostrar cuando se ha scrolleado 50% del slider
+
+        console.log('📊 Scroll Debug:', {
+            scrollPosition,
+            sliderHeight,
+            showMenuThreshold,
+            shouldShow: scrollPosition > showMenuThreshold
+        });
 
         if (scrollPosition > showMenuThreshold) {
             // Mostrar botón del menú con Tailwind classes
+            console.log('✅ Mostrando botón del menú');
             menuBtn.classList.remove('hidden');
-            menuBtn.classList.add('flex');
+            menuBtn.classList.add('flex', 'flex-col');
             
             // Trigger la animación de entrada
             setTimeout(() => {
@@ -51,12 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } else {
             // Ocultar botón del menú
+            console.log('❌ Ocultando botón del menú');
             menuBtn.classList.remove('opacity-100', 'translate-y-0');
             menuBtn.classList.add('opacity-0', 'translate-y-2');
             
             setTimeout(() => {
                 if (menuBtn.classList.contains('opacity-0')) {
-                    menuBtn.classList.remove('flex');
+                    menuBtn.classList.remove('flex', 'flex-col');
                     menuBtn.classList.add('hidden');
                 }
             }, 300);
@@ -106,8 +125,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Event Listeners ---
     
+    // Función throttle para el scroll
+    let scrollTimeout;
+    function throttledScroll() {
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(() => {
+            handleScroll();
+            scrollTimeout = null;
+        }, 16); // ~60fps
+    }
+    
     // Scroll listener para mostrar/ocultar botón
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', throttledScroll);
     
     // Click en botón del menú
     menuBtn.addEventListener('click', (e) => {
@@ -155,7 +184,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Ejecutar función de scroll al cargar para establecer estado inicial
-    handleScroll();
+    setTimeout(() => {
+        handleScroll();
+        console.log('🚀 Menú inicializado - Estado inicial verificado');
+    }, 100);
     
     console.log('🚀 Menu.js with Tailwind initialized successfully');
 });

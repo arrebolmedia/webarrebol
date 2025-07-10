@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Botón del menú con clases de Tailwind -->
 <button 
     id="menu-btn" 
-    class="fixed top-5 right-5 w-12 h-12 bg-white/95 backdrop-blur-sm border-none rounded-lg cursor-pointer z-50 hidden flex-col items-center justify-center shadow-lg transition-all duration-300 opacity-0 transform translate-y-2 hover:-translate-y-0.5 hover:shadow-xl group"
+    class="fixed top-5 right-5 w-12 h-12 bg-white/95 backdrop-blur-sm border-none rounded-lg cursor-pointer z-50 hidden items-center justify-center shadow-lg transition-all duration-300 opacity-0 transform translate-y-2 hover:-translate-y-0.5 hover:shadow-xl group"
 >
     <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
     <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
