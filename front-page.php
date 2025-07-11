@@ -80,14 +80,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- MENÚ MINIMALISTA CON TAILWIND CSS -->
-<!-- Botón del menú con clases de Tailwind -->
+<!-- Botón del menú - Totalmente controlado por JavaScript -->
 <button 
     id="menu-btn" 
-    class="fixed top-5 right-5 w-12 h-12 bg-white/95 backdrop-blur-sm border-none rounded-lg cursor-pointer z-50 hidden items-center justify-center shadow-lg transition-all duration-300 opacity-0 transform translate-y-2 hover:-translate-y-0.5 hover:shadow-xl group"
->
-    <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
-    <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
-    <div class="hamburger-line w-6 h-0.5 bg-gray-800 my-0.5 transition-all duration-300 rounded-sm group-hover:bg-gray-600"></div>
+    class="fixed top-5 right-5 w-12 h-12 bg-white hover:bg-gray-50 rounded-full shadow-lg hover:shadow-xl border border-gray-200 z-50 flex items-center justify-center gap-1 transition-all duration-300"
+    aria-label="Abrir menú de navegación"
+    aria-expanded="false">
+    <span class="block w-5 h-0.5 bg-gray-600 transition-all duration-300"></span>
+    <span class="block w-5 h-0.5 bg-gray-600 transition-all duration-300"></span>
+    <span class="block w-5 h-0.5 bg-gray-600 transition-all duration-300"></span>
 </button>
 
 <!-- Backdrop del menú con Tailwind -->

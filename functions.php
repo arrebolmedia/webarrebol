@@ -18,6 +18,9 @@ function arrebol_theme_enqueue_scripts() {
     // Cargar Google Fonts
     wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap', array(), null);
     
+    // Cargar FontAwesome para íconos sociales
+    wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css', array(), '6.0.0');
+    
     // Enqueue slider JavaScript (necesario para el slider)
     wp_enqueue_script('arrebol-slider', get_template_directory_uri() . '/js/slider.js', array(), '1.0', true);
     

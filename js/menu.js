@@ -1,193 +1,362 @@
-/* ================================================================
-  MENÚ ELEGANTE CON TAILWIND CSS
-  Menu moderno que aparece después de hacer scroll pasando el slider
-  ================================================================
-*/
+// MENÚ ELEGANTE ARREBOL WEDDINGS
+console.log('🚨 MENU.JS CARGADO CORRECTAMENTE');
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✨ Menu.js with Tailwind loaded');
+    console.log('🎯 DOM CARGADO - Iniciando menú');
+    
+    // Crear botón hamburger elegante
+    const menuBtn = document.createElement('button');
+    menuBtn.id = 'menu-btn';
+    menuBtn.innerHTML = `
+        <span></span>
+        <span></span>
+        <span></span>
+    `;
 
-    // --- Elementos del menú ---
-    const menuBtn = document.getElementById('menu-btn');
-    const menuCloseBtn = document.getElementById('menu-close');
-    const fullscreenMenu = document.getElementById('fullscreen-menu');
-    const menuBackdrop = document.getElementById('menu-backdrop');
-    const menuItems = document.querySelectorAll('.menu-item');
-    const menuInfo = document.getElementById('menu-info');
-    const slider = document.querySelector('.slider-container');
+    // Estilos del botón hamburger
+    menuBtn.style.cssText = `
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        pointer-events: auto;
+        user-select: none;
+        opacity: 0;
+        transform: scale(0.8);
+    `;
 
-    console.log('🔍 Menu elements found:', {
-        menuBtn: !!menuBtn,
-        menuCloseBtn: !!menuCloseBtn,
-        fullscreenMenu: !!fullscreenMenu,
-        menuBackdrop: !!menuBackdrop,
-        slider: !!slider,
-        menuItems: menuItems.length,
-        menuInfo: !!menuInfo
+    // Estilizar las líneas del hamburger
+    const spans = menuBtn.querySelectorAll('span');
+    spans.forEach(span => {
+        span.style.cssText = `
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: #333;
+            margin: 2px 0;
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        `;
     });
 
-    // Si los elementos esenciales no existen, no continúes
-    if (!menuBtn || !fullscreenMenu || !menuBackdrop) {
-        console.error('❌ Elementos esenciales del menú no encontrados');
-        return;
-    }
+    // Efectos hover del botón
+    menuBtn.addEventListener('mouseenter', function() {
+        this.style.transform = this.style.transform.includes('scale(1)') ? 'scale(1.1)' : 'scale(0.9)';
+        this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.15)';
+    });
+    
+    menuBtn.addEventListener('mouseleave', function() {
+        const currentOpacity = this.style.opacity;
+        if (currentOpacity === '1') {
+            this.style.transform = 'scale(1)';
+        } else {
+            this.style.transform = 'scale(0.8)';
+        }
+        this.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+    });
 
-    // Debug inicial - verificar que el slider existe
-    if (slider) {
-        console.log('🎬 Slider encontrado:', {
-            height: slider.offsetHeight,
-            classList: slider.classList.toString()
+    // Añadir botón al DOM
+    document.body.appendChild(menuBtn);
+    console.log('✅ Botón de menú creado y añadido al DOM');
+
+    // Funcionalidad del menú - crear overlay elegante
+    menuBtn.addEventListener('click', function(e) {
+        console.log('🖱️ CLIC DETECTADO en botón de menú');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Verificar si ya existe un menú abierto
+        const existingMenu = document.querySelector('#elegant-menu-overlay');
+        if (existingMenu) {
+            console.log('⚠️ Menú ya existe, cerrando...');
+            existingMenu.remove();
+            return;
+        }
+        
+        // Crear menú elegante
+        const elegantMenu = document.createElement('div');
+        elegantMenu.id = 'elegant-menu-overlay';
+        elegantMenu.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245, 243, 240, 0.98), rgba(255, 255, 255, 0.95));
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(15px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        `;
+        
+        elegantMenu.innerHTML = `
+            <div style="text-align: center; color: #2c2c2c; max-width: 500px; padding: 40px; height: 100vh; display: flex; flex-direction: column; justify-content: space-between;">
+                <!-- Botón de cerrar -->
+                <button id="close-menu" style="
+                    position: absolute;
+                    top: 30px;
+                    right: 40px;
+                    color: #2c2c2c;
+                    background: none;
+                    border: 1px solid rgba(44, 44, 44, 0.2);
+                    cursor: pointer;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                    font-size: 14px;
+                    font-weight: 300;
+                ">✕</button>
+                
+                <!-- Título principal más arriba -->
+                <div style="margin-top: 100px;">
+                    <h1 style="
+                        font-family: 'Playfair Display', Georgia, serif;
+                        font-size: 32px;
+                        font-weight: 400;
+                        color: #2c2c2c;
+                        margin: 0;
+                        letter-spacing: 2px;
+                        text-transform: uppercase;
+                    ">Arrebol Weddings</h1>
+                </div>
+                
+                <!-- Enlaces del menú en el centro -->
+                <nav style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 25px;">
+                    <a href="/#nosotros" class="menu-link" style="
+                        display: block;
+                        color: #2c2c2c;
+                        text-decoration: none;
+                        font-size: 22px;
+                        font-weight: 400;
+                        padding: 12px 0;
+                        border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+                        transition: all 0.3s ease;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        font-family: 'Playfair Display', Georgia, serif;
+                    ">Nosotros</a>
+                    
+                    <a href="/#servicios" class="menu-link" style="
+                        display: block;
+                        color: #2c2c2c;
+                        text-decoration: none;
+                        font-size: 22px;
+                        font-weight: 400;
+                        padding: 12px 0;
+                        border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+                        transition: all 0.3s ease;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        font-family: 'Playfair Display', Georgia, serif;
+                    ">Servicios</a>
+                    
+                    <a href="/#galeria" class="menu-link" style="
+                        display: block;
+                        color: #2c2c2c;
+                        text-decoration: none;
+                        font-size: 22px;
+                        font-weight: 400;
+                        padding: 12px 0;
+                        border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+                        transition: all 0.3s ease;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        font-family: 'Playfair Display', Georgia, serif;
+                    ">Galería</a>
+                    
+                    <a href="/#contacto" class="menu-link" style="
+                        display: block;
+                        color: #2c2c2c;
+                        text-decoration: none;
+                        font-size: 22px;
+                        font-weight: 400;
+                        padding: 12px 0;
+                        border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+                        transition: all 0.3s ease;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        font-family: 'Playfair Display', Georgia, serif;
+                    ">Contacto</a>
+                </nav>
+                
+                <!-- Redes sociales con separación de 100px -->
+                <div style="
+                    margin-top: 100px;
+                    margin-bottom: 60px;
+                    display: flex;
+                    justify-content: center;
+                    gap: 30px;
+                    align-items: center;
+                ">
+                    <a href="https://wa.me/527775001071" target="_blank" class="social-link" style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                    ">
+                        <i class="fab fa-whatsapp" style="
+                            font-size: 28px;
+                            color: #6a6a6a;
+                        "></i>
+                    </a>
+                    
+                    <a href="https://instagram.com/arrebolmedia_" target="_blank" class="social-link" style="
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-decoration: none;
+                        transition: all 0.3s ease;
+                    ">
+                        <i class="fab fa-instagram" style="
+                            font-size: 28px;
+                            color: #6a6a6a;
+                        "></i>
+                    </a>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(elegantMenu);
+        
+        // Animación de entrada
+        requestAnimationFrame(() => {
+            elegantMenu.style.opacity = '1';
         });
-    } else {
-        console.warn('⚠️ Slider no encontrado, usando altura de ventana');
+        
+        // Configurar todos los event listeners del menú
+        setupMenuEventListeners(elegantMenu);
+        
+        console.log('🍔 Menú elegante abierto correctamente');
+    });
+
+    // Función para configurar event listeners del menú
+    function setupMenuEventListeners(menuElement) {
+        // Efectos hover para los enlaces
+        const menuLinks = menuElement.querySelectorAll('.menu-link');
+        menuLinks.forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.color = '#d4af37';
+                this.style.transform = 'translateX(5px)';
+                this.style.paddingLeft = '10px';
+                this.style.borderBottomColor = 'rgba(212, 175, 55, 0.2)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.color = '#2c2c2c';
+                this.style.transform = 'translateX(0)';
+                this.style.paddingLeft = '0';
+                this.style.borderBottomColor = 'rgba(44, 44, 44, 0.1)';
+            });
+            
+            // Cerrar menú al hacer clic en enlace
+            link.addEventListener('click', function() {
+                closeMenu(menuElement);
+            });
+        });
+        
+        // Efectos hover para redes sociales
+        const socialLinks = menuElement.querySelectorAll('.social-link');
+        socialLinks.forEach(link => {
+            const icon = link.querySelector('i');
+            
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+                icon.style.color = '#d4af37';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                icon.style.color = '#6a6a6a';
+            });
+        });
+        
+        // Botón de cerrar
+        const closeBtn = menuElement.querySelector('#close-menu');
+        closeBtn.addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(212, 175, 55, 0.1)';
+            this.style.borderColor = '#d4af37';
+            this.style.color = '#d4af37';
+            this.style.transform = 'scale(1.1)';
+        });
+        
+        closeBtn.addEventListener('mouseleave', function() {
+            this.style.background = 'none';
+            this.style.borderColor = 'rgba(44, 44, 44, 0.2)';
+            this.style.color = '#2c2c2c';
+            this.style.transform = 'scale(1)';
+        });
+        
+        closeBtn.addEventListener('click', function() {
+            closeMenu(menuElement);
+        });
+        
+        // Cerrar con Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMenu(menuElement);
+            }
+        });
     }
 
-    // --- Control de visibilidad del botón del menú basado en scroll ---
+    // Función para cerrar el menú
+    function closeMenu(menuElement) {
+        menuElement.style.opacity = '0';
+        setTimeout(() => {
+            if (menuElement && menuElement.parentNode) {
+                menuElement.remove();
+            }
+        }, 300);
+    }
+
+    // Control de scroll para mostrar/ocultar botón
     function handleScroll() {
         const scrollPosition = window.scrollY;
-        const sliderHeight = slider ? slider.offsetHeight : window.innerHeight;
-        const showMenuThreshold = sliderHeight * 0.5; // Mostrar cuando se ha scrolleado 50% del slider
-
-        console.log('📊 Scroll Debug:', {
-            scrollPosition,
-            sliderHeight,
-            showMenuThreshold,
-            shouldShow: scrollPosition > showMenuThreshold
-        });
-
-        if (scrollPosition > showMenuThreshold) {
-            // Mostrar botón del menú con Tailwind classes
-            console.log('✅ Mostrando botón del menú');
-            menuBtn.classList.remove('hidden');
-            menuBtn.classList.add('flex', 'flex-col');
-            
-            // Trigger la animación de entrada
-            setTimeout(() => {
-                menuBtn.classList.remove('opacity-0', 'translate-y-2');
-                menuBtn.classList.add('opacity-100', 'translate-y-0');
-            }, 10);
-            
-        } else {
-            // Ocultar botón del menú
-            console.log('❌ Ocultando botón del menú');
-            menuBtn.classList.remove('opacity-100', 'translate-y-0');
-            menuBtn.classList.add('opacity-0', 'translate-y-2');
-            
-            setTimeout(() => {
-                if (menuBtn.classList.contains('opacity-0')) {
-                    menuBtn.classList.remove('flex', 'flex-col');
-                    menuBtn.classList.add('hidden');
-                }
-            }, 300);
-        }
-    }
-
-    // --- Función para abrir/cerrar el menú ---
-    function toggleMenu() {
-        const isMenuOpen = fullscreenMenu.classList.contains('is-open');
+        const showThreshold = 50;
         
-        if (isMenuOpen) {
-            // Cerrar menú
-            fullscreenMenu.classList.remove('is-open');
-            menuBackdrop.classList.remove('is-open');
-            menuBtn.classList.remove('is-open');
-            
-            // Remover clases de visibilidad de Tailwind
-            fullscreenMenu.classList.remove('opacity-100');
-            fullscreenMenu.classList.add('opacity-0', 'invisible');
-            menuBackdrop.classList.remove('opacity-100');
-            menuBackdrop.classList.add('opacity-0', 'invisible');
-            
-            // Restaurar scroll del body
-            document.body.style.overflow = 'auto';
-            
-            menuBtn.setAttribute('aria-expanded', 'false');
-            console.log('❌ Menú cerrado con Tailwind');
+        if (scrollPosition > showThreshold) {
+            menuBtn.style.opacity = '1';
+            menuBtn.style.transform = 'scale(1)';
+            menuBtn.style.pointerEvents = 'auto';
         } else {
-            // Abrir menú
-            fullscreenMenu.classList.add('is-open');
-            menuBackdrop.classList.add('is-open');
-            menuBtn.classList.add('is-open');
-            
-            // Agregar clases de visibilidad de Tailwind
-            fullscreenMenu.classList.remove('opacity-0', 'invisible');
-            fullscreenMenu.classList.add('opacity-100', 'visible');
-            menuBackdrop.classList.remove('opacity-0', 'invisible');
-            menuBackdrop.classList.add('opacity-100', 'visible');
-            
-            // Bloquear scroll del body
-            document.body.style.overflow = 'hidden';
-            
-            menuBtn.setAttribute('aria-expanded', 'true');
-            console.log('✅ Menú abierto con Tailwind');
+            menuBtn.style.opacity = '0';
+            menuBtn.style.transform = 'scale(0.8)';
+            menuBtn.style.pointerEvents = 'none';
         }
     }
 
-    // --- Event Listeners ---
+    // Listener de scroll
+    window.addEventListener('scroll', handleScroll);
     
-    // Función throttle para el scroll
-    let scrollTimeout;
-    function throttledScroll() {
-        if (scrollTimeout) return;
-        scrollTimeout = setTimeout(() => {
-            handleScroll();
-            scrollTimeout = null;
-        }, 16); // ~60fps
-    }
+    // Llamar una vez para configurar estado inicial
+    handleScroll();
     
-    // Scroll listener para mostrar/ocultar botón
-    window.addEventListener('scroll', throttledScroll);
-    
-    // Click en botón del menú
-    menuBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMenu();
-    });
-    
-    // Click en botón de cerrar (si existe)
-    if (menuCloseBtn) {
-        menuCloseBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
-        });
-    }
-    
-    // Click en backdrop para cerrar
-    menuBackdrop.addEventListener('click', (e) => {
-        e.preventDefault();
-        toggleMenu();
-    });
-    
-    // Click en items del menú para cerrar después de navegar
-    menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-            setTimeout(() => {
-                if (fullscreenMenu.classList.contains('is-open')) {
-                    toggleMenu();
-                }
-            }, 150); // Pequeño delay para mejor UX
-        });
-    });
-
-    // Tecla ESC para cerrar menú
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && fullscreenMenu.classList.contains('is-open')) {
-            toggleMenu();
-        }
-    });
-
-    // Prevenir clicks en el menú mismo cerrando el overlay
-    fullscreenMenu.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
-
-    // Ejecutar función de scroll al cargar para establecer estado inicial
-    setTimeout(() => {
-        handleScroll();
-        console.log('🚀 Menú inicializado - Estado inicial verificado');
-    }, 100);
-    
-    console.log('🚀 Menu.js with Tailwind initialized successfully');
+    console.log('🎯 Sistema de menú completamente funcional y cargado');
 });
+
+// Backup: Si DOMContentLoaded ya pasó
+if (document.readyState === 'loading') {
+    console.log('📄 Esperando DOMContentLoaded...');
+} else {
+    console.log('📄 DOM ya cargado, ejecutando menú inmediatamente');
+}
